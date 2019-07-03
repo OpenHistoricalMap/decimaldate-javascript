@@ -1,3 +1,9 @@
+/*
+ * decimaldate.js
+ * https://github.com/OpenHistoricalMap/decimaldate-javascript
+ */
+
+
 exports.iso2dec = iso2dec = (isodate) => {
     const datepieces = isodate.match(RE_YEARMONTHDAY);
     if (! datepieces) throw (`Invalid date format ${isodate}`);
