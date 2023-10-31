@@ -27,7 +27,7 @@ console.log( decimaldate.dec2iso(-1999.0835617) )
 ```
 
 
-### Dates Less Than 00010-01-01
+### Dates Less Than 0001-01-01
 
 This follows ISO 8601 in that year 0000 is 1 BCE, -0001 is 2 BCE, and so on. Expect negative dates to seem off by 1.
 
