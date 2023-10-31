@@ -15,6 +15,9 @@ exports.iso2dec = iso2dec = (isodate) => {
     if (plusminus == '-') decbit = 1 - decbit;
 
     let yeardecimal = parseInt(yearstring) + decbit;
+    if (plusminus == '-' && yeardecimal > 0) {  // ISO 8601 shift and year<=0 by 1, 0=1BCE, -1=2BCE
+        yeardecimal -= 1;
+    }
     if (plusminus == '-') yeardecimal *= -1;
 
     return parseFloat(yeardecimal.toFixed(DECIMALPLACES));
@@ -33,7 +36,7 @@ exports.dec2iso = dec2iso = (decdate) => {
         plusminus = '-';
     }
 
-    const yearstring = yearint + "";
+    let yearstring = yearint + "";
     const dty = daysinyear(yearstring);
     let targetday = dty * (Math.abs(decdate) % 1);
     targetday = decdate >= 0 ? Math.ceil(targetday) : Math.floor(targetday);
@@ -58,6 +61,8 @@ exports.dec2iso = dec2iso = (decdate) => {
 
     const daynumber = targetday - dayspassed;
     const daystring = (daynumber < 10 ? "0" : "") + daynumber;
+
+    if (plusminus == '-') yearstring = (yearint + 1) + "";  // ISO 8601 shift and year<=0 by 1, 0=1BCE, -1=2BCE
 
     return `${plusminus}${yearstring}-${monthstring}-${daystring}`;
 };
